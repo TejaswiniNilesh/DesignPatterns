@@ -1,0 +1,10 @@
+*.log
+/Debug
+*.opendb
+/.vs
+*.sln
+*.vcx*
+Creational/Debug
+Creational/Debug/*.*
+.vs
+Browse.VC.db
