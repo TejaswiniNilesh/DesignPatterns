@@ -4,7 +4,7 @@ It allows software to be flexible, extendable and maintainable.
 Benefit of using design patterns to develop software is less time is required in code refactoring.
 
 
-#Object Oriented Design Principles
+# Object Oriented Design Principles
 ## Acronym: SOLID
 
 1. Single Responsibility Principle
@@ -15,12 +15,12 @@ Benefit of using design patterns to develop software is less time is required in
 
 
 
-#Types of design patterns
+# Types of design patterns
 ##1. Creational
 Theses describes how objects should be created
 
-##2. Structural
+## 2. Structural
 These describes how objects are related to each other their hierarchy and composition
 
-##3. Behavioural
+## 3. Behavioural
 These describes common ways objects can communicate and pass messages to each other.
