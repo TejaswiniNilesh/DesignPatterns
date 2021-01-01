@@ -11,8 +11,7 @@ using namespace std;
 class Logger
 {
 public:
-	//static Logger* getInstance();
-	//static Logger& getInstance();
+	
 //	static void destroyInstance();
 	static Logger & getInstance()
 	{
@@ -24,7 +23,15 @@ public:
 			//}
 		//	lock.unlock();
 
-		std::call_once(flag, [&]() { m_instance.reset(new Logger()); cout << "count ++" << endl; });
+
+		//Executes the function exactly once, even if called concurrently, from several threads.
+		std::call_once(m_flag, [&](){ 
+			//m_instance = std::unique_ptr<Logger>(new Logger());
+			//m_instance = std::make_unique<Logger>();
+			
+			m_instance.reset(new Logger()); 
+			cout << " Instance created..." << endl;
+		});
 
 		//return m_instance.get_interface()
 		return *(m_instance.get());
@@ -35,14 +42,15 @@ private:
 	Logger(const Logger & Logger) = delete;
 	Logger operator=(const Logger & Logger) = delete;
 	//~Logger() = default;
+	//static Logger* getInstance();
 	
 	static std::unique_ptr<Logger> m_instance;
-	static std::once_flag flag;
+	static std::once_flag m_flag;
 
 };
 
 std::unique_ptr<Logger> Logger::m_instance;
-std::once_flag Logger::flag;
+std::once_flag Logger::m_flag;
 
 //
 //void Logger::destroyInstance()
@@ -60,21 +68,36 @@ void Logger::log(const std::string & message)
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
-int main()
+void thread1CallLog(string message)
 {
 	Logger &logInstance = Logger::getInstance();
-	
+	logInstance.log("Thread 1 logging done...");
+
+}
+void thread2CallLog(string message)
+{
+	Logger &logInstance2 = Logger::getInstance();
+	logInstance2.log("Thread 2 logging done...");
+
+}
+int main()
+{
+	cout << "Main worker thread" << endl;
+
+	/*
 	std::thread thread1(&Logger::log,"Task 1");
 	std::thread thread2(&Logger::log,"Task 2");
-
+	*/
 	std::cout << "starting first helper...\n";
-	thread1.join();
+	std::thread thread1(thread1CallLog, "Task 1");
 
 	std::cout << "starting second helper...\n";
-	thread2.join();
+	std::thread thread2(thread2CallLog, "Task 2");
 
 	std::cout << "waiting for helpers to finish..." << std::endl;
+	thread1.join();
+	thread2.join();
 
-	cout << "Main worker thread" << endl;
+
 	getchar();
 }
