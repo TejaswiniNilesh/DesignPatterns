@@ -16,7 +16,7 @@ Benefit of using design patterns to develop software is less time is required in
 
 
 # Types of design patterns
-##1. Creational
+## 1. Creational
 Theses describes how objects should be created
 
 ## 2. Structural
