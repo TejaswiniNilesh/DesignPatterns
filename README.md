@@ -1,7 +1,7 @@
 # DesignPatterns with modern C++
 Design pattern is a repeatable solution to problems in software development.
 It allows software to be flexible, extendable and maintainable.
-Benefit of using design patterns to develop software is less time is required in code refactoring.
+Benefit of using design patterns to develop software is less time required in code refactoring.
 
 
 # Object Oriented Design Principles
@@ -17,7 +17,9 @@ Benefit of using design patterns to develop software is less time is required in
 
 # Types of design patterns
 ## 1. Creational
-Theses describes how objects should be created
+Theses describes how, who, what and when objects are created.
+Creation of objects is separated from main function.
+Objects are created at runtime.
 
 ## 2. Structural
 These describes how objects are related to each other their hierarchy and composition
