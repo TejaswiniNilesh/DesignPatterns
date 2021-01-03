@@ -1,4 +1,4 @@
-# DesignPatterns with modern C++
+# Design Patterns with modern C++
 Design pattern is a repeatable solution to problems in software development.
 It allows software to be flexible, extendable and maintainable.
 Benefit of using design patterns to develop software is less time required in code refactoring.

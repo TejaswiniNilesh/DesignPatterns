@@ -22,7 +22,7 @@ namespace CreationalPatterns
 		SpellChecker(const std::string& word) :m_inputWord(word), m_correctWord("") {}
 		SpellChecker(const SpellChecker&) = delete;
 		SpellChecker& operator =(const SpellChecker&) = delete;
-		virtual ~SpellChecker() = 0;
+		virtual ~SpellChecker() {};
 
 	protected:
 		std::string m_inputWord;
@@ -70,7 +70,7 @@ namespace CreationalPatterns
 		Translator(const std::string& word) :m_inputWord(word), m_translatedWord("") {}
 		Translator(const Translator&) = delete;
 		Translator& operator =(const Translator&) = delete;
-		virtual ~Translator() = 0;
+		virtual ~Translator() {}
 
 	protected:
 		std::string m_inputWord;
@@ -82,7 +82,7 @@ namespace CreationalPatterns
 		
 		std::string getTranslate() const override
 		{
-			return "Translated Word: "+m_translatedWord;
+			return "Translated Word "+m_translatedWord;
 		}
 	
 		TranslationLib (const std::string& word) : Translator(word){}
@@ -95,7 +95,7 @@ namespace CreationalPatterns
 
 		std::string getTranslate() const override
 		{
-			return m_translatedWord;
+			return "Translated Word "+m_translatedWord;
 		}
 		TranslationService(const std::string& word) : Translator(word) {}
 
@@ -123,11 +123,11 @@ namespace CreationalPatterns
 	public:
 		std::unique_ptr<SpellChecker> callSpellChecker() override
 		{
-			return std::unique_ptr<SpellCheckService>();
+			return std::make_unique<SpellCheckService>(string("word for spellchecker service"));
 		}
 		std::unique_ptr<Translator> callTranslator() override
 		{
-			return std::unique_ptr<TranslationService>();
+			return std::make_unique<TranslationService>(string("word for translation service"));
 		}
 
 		ConcreteFactoryOnline() = default;
@@ -146,11 +146,11 @@ namespace CreationalPatterns
 	public:
 		std::unique_ptr<SpellChecker> callSpellChecker() override
 		{
-			return std::unique_ptr<SpellCheckLib>(new SpellCheckLib(string("input Word")));
+			return std::unique_ptr<SpellCheckLib>(new SpellCheckLib(string("word for spellcheck lib")));
 		}
 		std::unique_ptr<Translator> callTranslator() override
 		{
-			return std::unique_ptr<TranslationLib>(new TranslationLib(string("input word")));
+			return std::unique_ptr<TranslationLib>(new TranslationLib(string("word for translation lib")));
 		}
 
 		ConcreteFactoryOffline() = default;

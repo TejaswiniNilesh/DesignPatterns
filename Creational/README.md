@@ -15,6 +15,8 @@ This pattern deals with inheritance and types of objects are decided at compile 
 
 
 ## 4. Prototype Pattern:
+Clones complex objects to create new ones.
+Example: 
 
 
 
